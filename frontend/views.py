@@ -8,7 +8,7 @@ from django.shortcuts import HttpResponse
 
 API_BASE_URL = 'http://127.0.0.1:8000/api/projects/'
 
-
+print('Helo Rohit')
 
 def login_view(request):
     if request.method == 'POST':
