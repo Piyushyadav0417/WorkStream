@@ -1,10 +1,14 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+import environ
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-yt3zuxj5&331&=gts0v%)joskzm%*(2nj#95rz9k@ij!d4u(0q'
 
@@ -74,13 +78,13 @@ WSGI_APPLICATION = 'projectmanagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'projectmanagement',  
-        'USER': 'root',  
-        'PASSWORD': '9302208078',  
-        'HOST': 'localhost',  
-        'PORT': '3306',
-    } 
-}
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+    }
+    }
 
 
 # Password validation
