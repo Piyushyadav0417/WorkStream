@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+*.sqlite3
+*.log
+media/
+staticfiles/
+
+# Environments
+.env
+projectenv/
+
+# Migrations (ignore but keep __init__.py)
+*/migrations/
+!*/migrations/__init__.py
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp

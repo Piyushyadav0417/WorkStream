@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .top-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .top-links a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .top-links a:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .project {
+            border: 1px solid #ddd;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .project img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .project-actions {
+            margin-top: 10px;
+        }
+
+        .project-actions a {
+            margin-right: 12px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .project-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #444;
+            padding: 8px 12px;
+            margin: 0 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #eee;
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>My Projects</h1>
+
+    <div class="top-links">
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'project_create' %}">+ Create New Project</a>
+    </div>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if projects %}
+        {% for project in projects %}
+            <div class="project">
+                <div class="project-title">{{ project.title }}</div>
+                <p>{{ project.description }}</p>
+                {% if project.project_photo %}
+                    <img src="{{ project.project_photo }}" alt="Project Photo">
+                {% endif %}
+                <p><strong>Private:</strong> {{ project.is_private }}</p>
+                <div class="project-actions">
+                    <a href="{% url 'project_update' project.id %}">Edit</a>
+                    <a href="{% url 'project_delete' project.id %}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagination">
+            {% if previous_page %}
+                <a href="?page={{ current_page|add:"-1" }}">« Previous</a>
+            {% endif %}
+            {% if next_page %}
+                <a href="?page={{ current_page|add:"1" }}">Next »</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p style="text-align: center;">No projects found.</p>
+    {% endif %}
+</div>
+</body>
+</html>
