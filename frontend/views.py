@@ -8,8 +8,7 @@ from django.shortcuts import HttpResponse
 
 API_BASE_URL = 'http://127.0.0.1:8000/api/projects/'
 
-print('Helo Rohit')
-print('Hiii Piyushhh')
+print('removed duplicate printe lines')
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -172,4 +171,5 @@ def project_delete(request, project_id):
             return HttpResponse("Failed to delete project", status=400)
 
     return render(request, 'frontend/project_confirm_delete.html', {'project_id': project_id})
+
 
